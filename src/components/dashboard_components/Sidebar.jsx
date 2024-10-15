@@ -23,7 +23,7 @@ export default function Sidebar() {
                   {/*SIDE BAR*/}
             <div className='h-screen  w-[5%] xl:w-[4%] sm:px-8 hidden sm:flex flex-col border-r-2 items-center gap-8'>
             <Link to="/">
-            {/* YOUR MAIN LOGO */}
+            {/* MAIN LOGO (L for LITTLE LENS) */}
             <svg width="40" height="40" viewBox="0 0 54 56" fill="none" xmlns="http://www.w3.org/2000/svg" className='mt-4'>
             <ellipse cx="27" cy="28" rx="27" ry="28" fill="black"/>
             <path d="M20.7695 38V20.5455H25.5082V34.1818H32.565V38H20.7695Z" fill="white"/>
