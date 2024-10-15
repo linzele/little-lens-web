@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import Sidebar from './dahsboard_components/Sidebar';
+import Sidebar from './dashboard_components/Sidebar';
 
-import TopHeader from './dahsboard_components/TopHeader'
+import TopHeader from './dashboard_components/TopHeader'
 
-import ReviewsTable from './dahsboard_components/ReviewsTable';
+import ReviewsTable from './dashboard_components/ReviewsTable';
 
 import { getDocs, collection } from "firebase/firestore";
 import { db } from '@/firebase/firebase';

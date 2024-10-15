@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react'
-import PricingTable from './dahsboard_components/PricingTable'
+import PricingTable from './dashboard_components/PricingTable'
 import {  collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 
