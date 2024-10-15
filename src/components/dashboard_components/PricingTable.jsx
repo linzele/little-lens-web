@@ -18,8 +18,6 @@ export default function PricingTable(props) {
 
 
 
-
-   
     
 
 

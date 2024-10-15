@@ -74,9 +74,9 @@ const CTA = () => {
          ))}
 
 
-
+         <br/>
       </div>:
-      <><h1>Loading...</h1></>
+      <><h1>Loading...Please Login as Admin to see full functions..</h1></>
         
     }
 
