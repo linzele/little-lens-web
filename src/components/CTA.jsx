@@ -47,9 +47,10 @@ const CTA = () => {
     <div className='flex flex-col'>
     <section className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}>
       <div className='flex-1 flex flex-col'>
-      <h2 className={styles.heading2}>Start Your Adventure Today!</h2>
+      <h2 className={styles.heading2}>Ready to get premium?</h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-        Download now and unlock the full potential of your images—let your creativity shine!
+        Subscribe to our premium features starting from only @$14.99! 
+        Take pictures in style!
       </p>
       </div>
       <div className={`${styles.flexCenter} sm:ml-10 ml-0`}>

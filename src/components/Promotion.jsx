@@ -24,6 +24,8 @@ const Promotion = () => {
         />
       </div>
     </section>
+
+    
   )
 }
 
