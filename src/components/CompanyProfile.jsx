@@ -3,6 +3,7 @@ import Sidebar from './dashboard_components/Sidebar'
 import TopHeader from './dashboard_components/TopHeader'
 import CompanyContact from './CompanyContact'
 import ReviewCategory from './ReviewCategory'
+import StoryGenres from './StoryGenres'
 import PricingPlans from './PricingPlans'
 
 export default function CompanyProfile() {
@@ -24,6 +25,10 @@ export default function CompanyProfile() {
 
             {/* REVIEW CATEGORIES CONTAINER*/}
                 <ReviewCategory/>
+                
+            {/* REVIEW CATEGORIES CONTAINER*/}
+            <StoryGenres/>
+
           </div>
 
 

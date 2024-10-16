@@ -5,7 +5,7 @@ import CompanyProfile from "./components/CompanyProfile";
 import Header from "./components/header";
 import Home from "./components/home/Home";
 import ReviewsPage from "./components/ReviewsPage";
-
+import StoryGenres from "./components/StoryGenres";
 import { AuthProvider } from "./contexts/auth";
 import { useRoutes } from "react-router-dom";
 
@@ -32,7 +32,10 @@ function Admin() {
       path:"/review",
       element:<ReviewsPage/>
     },
-
+    {
+      path:"/storyGenres",
+      element:<StoryGenres/>
+    },
     {
       path:"/company-profile",
       element:<CompanyProfile/>

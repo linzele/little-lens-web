@@ -6,9 +6,10 @@ import Admin from './Admin.jsx';  // Admin component
 import Login from './components/auth/login/index.jsx';
 import Home from './components/home/Home.jsx';
 import { AuthProvider } from './contexts/auth';
-import './index.css'
 import ReviewsPage from './components/ReviewsPage';
 import CompanyProfile from './components/CompanyProfile';
+import StoryGenres from './components/StoryGenres';
+import './index.css'
 
 // Render the app with routing setup
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/reviews" element={<ReviewsPage/>}/>
+        <Route path="/storyGenres" element={<StoryGenres/>}/>
         <Route path="/company-profile" element={<CompanyProfile/>}></Route>
       </Routes>
     </Router>
