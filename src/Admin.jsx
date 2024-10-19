@@ -1,5 +1,4 @@
 import Login from "./components/auth/login";
-import Register from "./components/auth/register";
 import CompanyProfile from "./components/CompanyProfile";
 
 import Header from "./components/header";
@@ -18,10 +17,6 @@ function Admin() {
     {
       path: "/login",
       element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
     },
     {
       path: "/home",
