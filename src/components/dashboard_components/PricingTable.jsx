@@ -1,86 +1,52 @@
+
+import React, { useState } from 'react';
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
-
-
-
-
+    TableHead,
+} from '@/components/ui/table';
 
 export default function PricingTable(props) {
-    
-    const {prices,dataHeaders} = props
+  const { prices, dataHeaders, onEditClick } = props;
 
+  if (prices.length !== 0) {
+      return (
+          <div className="w-full h-full p-5">
+              <Table>
+                  <TableHeader>
+                      <TableRow>
+                          {dataHeaders.map((header, index) => (
+                              <TableHead key={index}>{header}</TableHead>
+                          ))}
+                      </TableRow>
+                  </TableHeader>
 
+                  <TableBody>
+                      {prices.map((price, index) => (
+                          <TableRow key={index}>
+                              <TableCell>{price.product}</TableCell>
+                              <TableCell>$ {price.unit_amount * 0.01}</TableCell>
+                              <TableCell>{price.recurring.interval}</TableCell>
+                              <TableCell>{price.recurring.interval_count}</TableCell>
 
-    
+                              {/* Edit Button */}
+                              <TableCell>
+                                  <button onClick={() => onEditClick(price)}>
+                                  <svg width="25" height="25" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M29.1429 27.5715H2.85714C2.22499 27.5715 1.71428 28.0822 1.71428 28.7144V30.0001C1.71428 30.1572 1.84285 30.2858 1.99999 30.2858H30C30.1571 30.2858 30.2857 30.1572 30.2857 30.0001V28.7144C30.2857 28.0822 29.775 27.5715 29.1429 27.5715ZM6.91785 24.5715C6.98928 24.5715 7.06071 24.5644 7.13214 24.5536L13.1393 23.5001C13.2107 23.4858 13.2786 23.4536 13.3286 23.4001L28.4679 8.26078C28.501 8.22774 28.5272 8.1885 28.5451 8.14529C28.5631 8.10209 28.5723 8.05577 28.5723 8.009C28.5723 7.96222 28.5631 7.91591 28.5451 7.8727C28.5272 7.8295 28.501 7.79025 28.4679 7.75721L22.5321 1.81793C22.4643 1.75007 22.375 1.71436 22.2786 1.71436C22.1821 1.71436 22.0929 1.75007 22.025 1.81793L6.88571 16.9572C6.83214 17.0108 6.79999 17.0751 6.78571 17.1465L5.73214 23.1536C5.69739 23.345 5.70981 23.5419 5.7683 23.7273C5.8268 23.9128 5.92962 24.0812 6.06785 24.2179C6.30357 24.4465 6.59999 24.5715 6.91785 24.5715Z" fill="black" />
+                            </svg>
+                                  </button>
+                              </TableCell>
+                          </TableRow>
+                      ))}
+                  </TableBody>
+              </Table>
+          </div>
+      );
+  }
 
-
-    if (prices.length !== 0 )
-    {
-    return (
-    <>
-
-
-
-                {/*Table*/}
-                <div className="w-full h-full  p-5 ">
-                <Table>
-
-                {/* TABLE HEADER  */}
-                <TableHeader>
-                    <TableRow>
-           
-                    {dataHeaders.map((header,index)=>(
-                         <TableHead key={index}>{header}</TableHead>
-                    ))}
-
-
-                    </TableRow>
-                </TableHeader>
-
-                
-                <TableBody>
-                    {prices.map((price,index)=>(
-
-                        <TableRow key={index}>
-                        <TableCell>{price.product}</TableCell>
-                        <TableCell>$ {price.unit_amount*0.01}</TableCell>
-                        <TableCell>{price.recurring.interval}</TableCell>
-                        <TableCell>{price.recurring.interval_count}</TableCell>
-                    
-                        {/* UPDATE/ DELETE BUTTON */}
-                        <TableCell>
-                        <button>
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 15.9642C4 16.2269 4.05173 16.487 4.15224 16.7296C4.25275 16.9723 4.40007 17.1927 4.58579 17.3784C4.7715 17.5642 4.99198 17.7115 5.23463 17.812C5.47728 17.9125 5.73736 17.9642 6 17.9642C6.26264 17.9642 6.52272 17.9125 6.76537 17.812C7.00802 17.7115 7.2285 17.5642 7.41421 17.3784C7.59993 17.1927 7.74725 16.9723 7.84776 16.7296C7.94827 16.487 8 16.2269 8 15.9642C8 15.7016 7.94827 15.4415 7.84776 15.1989C7.74725 14.9562 7.59993 14.7357 7.41421 14.55C7.2285 14.3643 7.00802 14.217 6.76537 14.1165C6.52272 14.016 6.26264 13.9642 6 13.9642C5.73736 13.9642 5.47728 14.016 5.23463 14.1165C4.99198 14.217 4.7715 14.3643 4.58579 14.55C4.40007 14.7357 4.25275 14.9562 4.15224 15.1989C4.05173 15.4415 4 15.7016 4 15.9642ZM14 15.9642C14 16.4947 14.2107 17.0034 14.5858 17.3784C14.9609 17.7535 15.4696 17.9642 16 17.9642C16.5304 17.9642 17.0391 17.7535 17.4142 17.3784C17.7893 17.0034 18 16.4947 18 15.9642C18 15.4338 17.7893 14.9251 17.4142 14.55C17.0391 14.1749 16.5304 13.9642 16 13.9642C15.4696 13.9642 14.9609 14.1749 14.5858 14.55C14.2107 14.9251 14 15.4338 14 15.9642ZM24 15.9642C24 16.4947 24.2107 17.0034 24.5858 17.3784C24.9609 17.7535 25.4696 17.9642 26 17.9642C26.5304 17.9642 27.0391 17.7535 27.4142 17.3784C27.7893 17.0034 28 16.4947 28 15.9642C28 15.4338 27.7893 14.9251 27.4142 14.55C27.0391 14.1749 26.5304 13.9642 26 13.9642C25.4696 13.9642 24.9609 14.1749 24.5858 14.55C24.2107 14.9251 24 15.4338 24 15.9642Z" fill="black"/>
-                                </svg>
-                                </button>
-                        </TableCell>
-
-
-                        </TableRow>
-
-                    ))}
-            
-                </TableBody>
-                </Table>
-                </div>
-
-
-
-
- 
-    
-    </>
-  )
-}
- // when loading
- return <div className="flex justify-center items-center w-full h-full"><h1 className="text-4xl">Loading....</h1></div>
-
+  return <div className="flex justify-center items-center w-full h-full"><h1 className="text-4xl">Loading....</h1></div>;
 }
