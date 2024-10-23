@@ -24,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/reviews" element={<ReviewsPage/>}/>
         <Route path="/storyGenres" element={<StoryGenres/>}/>
         <Route path="/company-profile" element={<CompanyProfile/>}></Route>
+        <Route path="/PrivacyCode" element={<PrivacyCode />} />
       </Routes>
     </Router>
     </AuthProvider>
