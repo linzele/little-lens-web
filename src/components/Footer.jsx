@@ -84,7 +84,6 @@ const Footer = () => {
     <a 
       href="/PrivacyCode" 
       className="font-poppins font-normal text-center text-[18px] leading-[27px] text-white hover:underline"
-      target="_blank" 
         >
       Privacy Policy
     </a>
