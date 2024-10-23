@@ -82,7 +82,7 @@ const Footer = () => {
 
     <div className='mt-6'>
     <a 
-      href="/PrivacyCode" 
+      href="/PrivacyCode.html" 
       className="font-poppins font-normal text-center text-[18px] leading-[27px] text-white hover:underline"
         >
       Privacy Policy
