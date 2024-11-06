@@ -9,6 +9,7 @@ import { AuthProvider } from './contexts/auth';
 import ReviewsPage from './components/ReviewsPage';
 import CompanyProfile from './components/CompanyProfile';
 import StoryGenres from './components/StoryGenres';
+import InterestsManagement from './components/interest';
 import './index.css'
 
 // Render the app with routing setup

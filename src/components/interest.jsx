@@ -1,93 +1,93 @@
-import { doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from '@/firebase/firebase';
 import { useEffect, useState } from "react";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export default function ReviewCategoryManagement() {
-    const [reviewCategories, setReviewCategories] = useState([]);
+export default function InterestsManagement() {
+    const [interests, setInterests] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [editCategories, setEditCategories] = useState([]);
-    const [newCategory, setNewCategory] = useState('');
+    const [editInterests, setEditInterests] = useState([]);
+    const [newInterest, setNewInterest] = useState('');
 
-    async function getReviewCategories() {
+    async function getInterests() {
         try {
-            const docRef = doc(db, 'reviewCategories', 'categories');
+            const docRef = doc(db, 'interests', 'interests');
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setReviewCategories(docSnap.data().names);
-                setEditCategories(docSnap.data().names); 
+                setInterests(docSnap.data().interestArray);
+                setEditInterests(docSnap.data().interestArray);
             } else {
                 console.log('No such document!');
             }
         } catch (error) {
-            console.error("Error fetching review categories:", error);
+            console.error("Error fetching interests:", error);
         }
     }
 
     useEffect(() => {
-        getReviewCategories();
+        getInterests();
     }, []);
 
     const handleCancel = () => {
-        setEditCategories(reviewCategories); 
-        setShowModal(false); 
-        setNewCategory('');
+        setEditInterests(interests);
+        setShowModal(false);
+        setNewInterest('');
     };
 
     const handleSave = async () => {
-        const docRef = doc(db, 'reviewCategories', 'categories');
+        const docRef = doc(db, 'interests', 'interests');
         try {
             await updateDoc(docRef, {
-                names: editCategories
+                interestArray: editInterests
             });
-            setReviewCategories(editCategories);
-            setShowModal(false); 
-            console.log("Review categories updated successfully!");
+            setInterests(editInterests);
+            setShowModal(false);
+            console.log("Interests updated successfully!");
         } catch (error) {
-            console.error("Error updating review categories:", error);
+            console.error("Error updating interests:", error);
         }
     };
 
     const handleDelete = async (index) => {
-        const docRef = doc(db, 'reviewCategories', 'categories');
+        const docRef = doc(db, 'interests', 'interests');
         try {
-            const updatedCategories = [...editCategories];
-            updatedCategories.splice(index, 1);
+            const updatedInterests = [...editInterests];
+            updatedInterests.splice(index, 1);
             await updateDoc(docRef, {
-                names: updatedCategories
+                interestArray: updatedInterests
             });
-            setReviewCategories(updatedCategories);
-            setEditCategories(updatedCategories);
-            console.log("Review category deleted successfully!");
+            setInterests(updatedInterests);
+            setEditInterests(updatedInterests);
+            console.log("Interest deleted successfully!");
         } catch (error) {
-            console.error("Error deleting review category:", error);
+            console.error("Error deleting interest:", error);
         }
     };
 
     const handleCreate = async () => {
-        if (newCategory.trim() !== '') {
-            const docRef = doc(db, 'reviewCategories', 'categories');
+        if (newInterest.trim() !== '') {
+            const docRef = doc(db, 'interests', 'interests');
             try {
                 await updateDoc(docRef, {
-                    names: arrayUnion(newCategory.trim())
+                    interestArray: arrayUnion(newInterest.trim())
                 });
-                setReviewCategories([...reviewCategories, newCategory.trim()]);
-                setEditCategories([...editCategories, newCategory.trim()]);
-                setNewCategory('');
-                console.log("Review category created successfully!");
+                setInterests([...interests, newInterest.trim()]);
+                setEditInterests([...editInterests, newInterest.trim()]);
+                setNewInterest('');
+                console.log("Interest created successfully!");
             } catch (error) {
-                console.error("Error creating review category:", error);
+                console.error("Error creating interest:", error);
             }
         }
     };
 
     return (
         <div className='w-full h-[50%] rounded-lg shadow-lg border-2'>
-            {reviewCategories.length > 0 ? (
+            {interests.length > 0 ? (
                 <>
                     <div className='w-full flex flex-row p-4 pb-1 justify-between items-center'>
-                        <h1 className='text-xl font-bold underline'>Review Categories</h1>
+                        <h1 className='text-xl font-bold underline'>Interests</h1>
                         <div className="flex items-center gap-2">
                         <button onClick={() => setShowModal(true)} className="focus:outline-none">
     <svg width="25" height="25" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,11 +96,11 @@ export default function ReviewCategoryManagement() {
 </button>
                         </div>
                     </div>
-        
+
                     <ul className="list-disc pl-14">
-                        {reviewCategories.map((name, index) => (
+                        {interests.map((interest, index) => (
                             <li key={index} className="text-2xl mt-2 flex justify-between items-center">
-                                {name}
+                                {interest}
                                 <Button variant="danger" onClick={() => handleDelete(index)}>Delete</Button>
                             </li>
                         ))}
@@ -109,16 +109,16 @@ export default function ReviewCategoryManagement() {
                     {showModal && (
                         <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-50 flex justify-center items-center">
                             <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
-                                <h2 className="text-xl font-bold mb-4">Edit Review Categories</h2>
-                                {editCategories.map((category, index) => (
+                                <h2 className="text-xl font-bold mb-4">Edit Interests</h2>
+                                {editInterests.map((interest, index) => (
                                     <div key={index} className="flex items-center justify-between mb-4">
                                         <Input
                                             type="text"
-                                            value={editCategories[index]}
+                                            value={editInterests[index]}
                                             onChange={(e) => {
-                                                const updatedCategories = [...editCategories];
-                                                updatedCategories[index] = e.target.value;
-                                                setEditCategories(updatedCategories);
+                                                const updatedInterests = [...editInterests];
+                                                updatedInterests[index] = e.target.value;
+                                                setEditInterests(updatedInterests);
                                             }}
                                             className="w-full"
                                         />
@@ -128,10 +128,10 @@ export default function ReviewCategoryManagement() {
                                 <div className="flex items-center mb-4">
                                     <Input
                                         type="text"
-                                        value={newCategory}
-                                        onChange={(e) => setNewCategory(e.target.value)}
+                                        value={newInterest}
+                                        onChange={(e) => setNewInterest(e.target.value)}
                                         className="w-full"
-                                        placeholder="New Category"
+                                        placeholder="New Interest"
                                     />
                                     <Button onClick={handleCreate}>Create</Button>
                                 </div>

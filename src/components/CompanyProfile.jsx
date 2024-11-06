@@ -5,6 +5,7 @@ import CompanyContact from './CompanyContact'
 import ReviewCategory from './ReviewCategory'
 import StoryGenres from './StoryGenres'
 import PricingPlans from './PricingPlans'
+import InterestsManagement from './interest'
 
 export default function CompanyProfile() {
   return (
@@ -28,7 +29,8 @@ export default function CompanyProfile() {
                 
             {/* REVIEW CATEGORIES CONTAINER*/}
             <StoryGenres/>
-
+            {/* REVIEW CATEGORIES CONTAINER*/}
+            <InterestsManagement/>
           </div>
 
 

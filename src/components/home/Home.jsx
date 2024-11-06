@@ -15,12 +15,12 @@ import { useAuth } from "@/contexts/auth"
 const Home = () => {
 
     const [accountsData,setAccountData] = useState([]);
-    const limit = 3;
+    const limit = 4;
 
     const { currentUser } = useAuth()
    
     const dataHeaders = [
-        "Avatar","Id","Name","Status",""
+        "Avatar","Email","Name","Status",""
     ]
 
 

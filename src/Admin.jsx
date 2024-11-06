@@ -5,6 +5,7 @@ import Header from "./components/header";
 import Home from "./components/home/Home";
 import ReviewsPage from "./components/ReviewsPage";
 import StoryGenres from "./components/StoryGenres";
+import InterestsManagement from "./components/interest";
 import { AuthProvider } from "./contexts/auth";
 import { useRoutes } from "react-router-dom";
 
