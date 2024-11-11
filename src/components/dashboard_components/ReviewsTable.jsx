@@ -16,14 +16,24 @@ export default function ReviewsTable(props) {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedRating, setSelectedRating] = useState(''); // Initially no rating selected
+    const [selectedReviewCategory, setSelectedReviewCategory] = useState(''); // Initially no review category selected
 
     const filteredReviews = reviews.filter((rev) =>
-        rev.review.toLowerCase().startsWith(searchQuery.toLowerCase()) &&
-        (selectedRating ? rev.rating === parseInt(selectedRating) : true) // Filter by rating if selected
+        rev.userDisplayName.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (selectedRating ? rev.rating === parseInt(selectedRating) : true) && // Filter by rating if selected
+        (selectedReviewCategory ? rev.reviewCategory === selectedReviewCategory : true) // Filter by review category if selected
     );
 
     const handleRatingChange = (event) => {
         setSelectedRating(event.target.value); 
+    };
+
+    const handleReviewCategoryChange = (event) => {
+        setSelectedReviewCategory(event.target.value);
+    };
+
+    const handleSearch = (event) => {
+        setSearchQuery(event.target.value);
     };
 
     if (reviews.length > 0) {
@@ -42,28 +52,48 @@ export default function ReviewsTable(props) {
                             </div>
                             <Input
                                 type="text"
-                                placeholder="🔍 Search..."
+                                placeholder="🔍 Search by Username..."
                                 className="sm:w-[20%]"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={handleSearch}
                             />
                         </div>
 
-                        {/* Rating Filter Dropdown */}
-                        <div className="w-full h-[10%] p-5 flex flex-col">
-                            <label className="font-semibold mb-2">Filter by Rating:</label>
-                            <select
-                                className="border rounded-md p-2"
-                                value={selectedRating}
-                                onChange={handleRatingChange}
-                            >
-                                <option value="">All Ratings</option>
-                                {[1, 2, 3, 4, 5].map((rating) => (
-                                    <option key={rating} value={rating}>
-                                       {rating} Star 
-                                    </option>
-                                ))}
-                            </select>
+                        {/* Rating and Review Category Filters */}
+                        <div className="w-full h-[15%] p-5 flex flex-col sm:flex-row justify-between">
+                            {/* Rating Filter */}
+                            <div className="flex flex-col sm:mr-4 sm:w-1/2">
+                                <label className="font-semibold mb-2">Filter by Rating:</label>
+                                <select
+                                    className="border rounded-md p-2"
+                                    value={selectedRating}
+                                    onChange={handleRatingChange}
+                                >
+                                    <option value="">All Ratings</option>
+                                    {[1, 2, 3, 4, 5].map((rating) => (
+                                        <option key={rating} value={rating}>
+                                           {rating} Star 
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Review Category Filter */}
+                            <div className="flex flex-col sm:w-1/2">
+                                <label className="font-semibold mb-2">Filter by Review Category:</label>
+                                <select
+                                    className="border rounded-md p-2"
+                                    value={selectedReviewCategory}
+                                    onChange={handleReviewCategoryChange}
+                                >
+                                    <option value="">All Categories</option>
+                                    {[...new Set(reviews.map((rev) => rev.reviewCategory))].map((category) => (
+                                        <option key={category} value={category}>
+                                            {category}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
                         {/* Table */}

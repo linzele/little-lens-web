@@ -23,17 +23,10 @@ const Download = () => {
       Download now and start creating your story today!
         </p>
         <div className='flex flex-row flex-wrap sm:mt-10 mt-6'>
-          <img
-            src={apple}
-            alt='app-store'
-            className='w-[128px] h-[42px] object-contain mr-5 cursor-pointer'
-          />
-          <img
-            src={google}
-            alt='google-play'
-            className='w-[128px] h-[42px] object-contain cursor-pointer'
-          />
-        </div>
+  <button className='w-[240px] h-[50px] bg-[#007bff] hover:bg-[#00e1ff] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out'>
+    Download APK for Android
+  </button>
+</div>
       </div>  
     </section>
   )

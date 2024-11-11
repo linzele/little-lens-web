@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../../firebase/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 const AuthContext = React.createContext();
 
@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [isEmailUser, setIsEmailUser] = useState(false);
   const [isGoogleUser, setIsGoogleUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null); // Add this line
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -22,7 +23,7 @@ export function AuthProvider({ children }) {
 
   function initializeUser(user) {
     if (user) {
-      setCurrentUser(user);  // No need to spread user object
+      setCurrentUser(user);
 
       // Check if provider is email and password login
       const isEmail = user.providerData.some(
@@ -44,17 +45,33 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }
 
+  const handleLogin = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setErrorMessage(null); // Reset the error message
+    } catch (error) {
+      setErrorMessage("Invalid email or password. Please try again.");
+    }
+  };
+
   const value = {
     userLoggedIn,
     isEmailUser,
     isGoogleUser,
     currentUser,
     setCurrentUser,
+    handleLogin,
+    errorMessage, // Add this line
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}  {/* Only render children when loading is done */}
+      {!loading && children}
+      {errorMessage && ( // Add this block
+        <div className="fixed top-0 left-0 w-full bg-red-500 text-white p-4 text-center">
+          {errorMessage}
+        </div>
+      )}
     </AuthContext.Provider>
   );
 }

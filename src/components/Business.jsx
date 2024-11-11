@@ -1,7 +1,6 @@
 import React from 'react'
 import { features } from '../constants'
 import styles, { layout } from '../style'
-import Button from './Button'
 
 const FeatureCard = ({ icon, title, content, index }) => (
   <div className={`flex flex-row p-6 rounded-[20px] ${index !== features.length - 1 ? 'mb-6' : 'mb-0'} feature-card`}>
@@ -33,7 +32,6 @@ const Business = () => {
         With our app, turn your captured moments into vibrant narratives, 
         bringing to life the experiences, emotions, and adventures that shape your world.
         </p>
-        <Button styles='mt-10'/>
       </div>
       <div className={`${layout.sectionImg} flex-col`}>
         {features.map((feature, index) => (

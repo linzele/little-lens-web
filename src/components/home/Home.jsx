@@ -20,7 +20,7 @@ const Home = () => {
     const { currentUser } = useAuth()
    
     const dataHeaders = [
-        "Avatar","Email","Name","Status",""
+        "Avatar","Email","Name","Active/Inactive",""
     ]
 
 

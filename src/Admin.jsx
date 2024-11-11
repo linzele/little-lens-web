@@ -1,6 +1,6 @@
 import Login from "./components/auth/login";
 import CompanyProfile from "./components/CompanyProfile";
-
+import Promotion from "./components/Promotion";
 import Header from "./components/header";
 import Home from "./components/home/Home";
 import ReviewsPage from "./components/ReviewsPage";

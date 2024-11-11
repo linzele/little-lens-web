@@ -1,33 +1,26 @@
-import React from 'react'
-import styles from '../style'
-import Button from './Button'
-
-import { useState,useEffect } from 'react'
-import PricingTable from './dashboard_components/PricingTable'
-import {  collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase/firebase";
-
-
+import React, { useState, useEffect } from 'react';
+import styles from '../style';
+import PricingTable from './dashboard_components/PricingTable';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/firebase/firebase';
 
 const CTA = () => {
+  const [prices, setPrices] = useState([]);
+  const subscriptionPlanId = 'prod_R0zfOl6Hu8Teuy'; // Your document ID, **** WILL CRASH IF DOCUMENT NAME CHANGES TAKE NOTE !!!!!!!!!!!
+  const pricesCollectionRef = collection(db, 'subscriptionPlans', subscriptionPlanId, 'prices');
 
-  const [prices,setPrices] = useState([]);
-  const subscriptionPlanId = "prod_R0zfOl6Hu8Teuy";  // Your document ID, **** WILL CRASH IF DOCUMENT NAME CHANGES TAKE NOTE !!!!!!!!!!!
-
-  const pricesCollectionRef = collection(db, "subscriptionPlans", subscriptionPlanId, "prices");
-  
   const fetchPrices = async () => {
-  try {
+    try {
       const querySnapshot = await getDocs(pricesCollectionRef);
-      const pricesArray = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
+      const pricesArray = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
       }));
       console.log(pricesArray);
       return pricesArray;
-  } catch (error) {
-      console.error("Error fetching prices: ", error);
-  }
+    } catch (error) {
+      console.error('Error fetching prices: ', error);
+    }
   };
 
   useEffect(() => {
@@ -39,12 +32,9 @@ const CTA = () => {
     fetchAndSetPrices();
   }, []);
 
-
-
-  
-
   return (
     <div className="flex flex-col">
+      {/* Pricing Section */}
       <section
         className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
       >
@@ -55,10 +45,10 @@ const CTA = () => {
           </p>
         </div>
         <div className={`${styles.flexCenter} sm:ml-10 ml-0`}>
-          <Button />
         </div>
       </section>
 
+      {/* Pricing Cards */}
       <div className="w-full bg-black-gradient-2 rounded-lg py-8">
         <h1 className="text-3xl text-white text-center border-b-2 pb-4">Pricing</h1>
         {prices.length > 0 ? (
@@ -72,9 +62,7 @@ const CTA = () => {
                   ${(price.unit_amount * 0.01).toFixed(2)} {price.currency}
                 </h2>
                 <p className="text-gray-600 mb-4">Billed Every {price.interval}</p>
-                <Button variant="primary" className="w-full">
-                  Check it out
-                </Button>
+
               </div>
             ))}
           </div>
@@ -84,8 +72,66 @@ const CTA = () => {
           </div>
         )}
       </div>
+
+      {/* Comparison Table */}
+      <div className="w-full bg-black-gradient-2 rounded-lg py-8 mt-8">
+        <h1 className="text-3xl text-white text-center border-b-2 pb-4">Plan Comparison</h1>
+        <div className="overflow-x-auto px-8">
+          <table className="w-full text-white border-separate border-spacing-2">
+            <thead>
+              <tr>
+                <th className="text-lg font-bold text-left">Features</th>
+                <th className="text-lg font-bold text-center">Basic Plan</th>
+                <th className="text-lg font-bold text-center">Premium Plan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="py-4">General Object Detection and Description</td>
+                <td className="text-center">✔️</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Interactive Quizzes</td>
+                <td className="text-center">✔️</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Dictionary of General Objects Scanned</td>
+                <td className="text-center">✔️</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Realistic Text to Speech for Pictures Taken</td>
+                <td className="text-center">✔️</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Visualization of Learning Progress</td>
+                <td className="text-center">✔️</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Customised Story Generation</td>
+                <td className="text-center">❌</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Realistic Text to Speech Support for Stories</td>
+                <td className="text-center">❌</td>
+                <td className="text-center">✔️</td>
+              </tr>
+              <tr>
+                <td className="py-4">Landmark Detection in Photos and Educational Fun Facts</td>
+                <td className="text-center">❌</td>
+                <td className="text-center">✔️</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default CTA
+export default CTA;

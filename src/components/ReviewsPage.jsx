@@ -20,7 +20,7 @@ const ReviewsPage = () => {
     const { currentUser } = useAuth()
    
     const dataHeaders = [
-        "Userid","DatePublished","Published","Rating","Review","ReviewCategory",""
+        "Username","DatePublished","Published","Rating","Review","ReviewCategory",""
     ]
 
 
