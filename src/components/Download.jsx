@@ -23,9 +23,15 @@ const Download = () => {
       Download now and start creating your story today!
         </p>
         <div className='flex flex-row flex-wrap sm:mt-10 mt-6'>
-  <button className='w-[240px] h-[50px] bg-[#007bff] hover:bg-[#00e1ff] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out'>
-    Download APK for Android
-  </button>
+        <a
+  href="https://expo.dev/accounts/tharvs/projects/LittleLens/builds/b54fcbe5-aa98-4cc7-b05a-d6212221d627"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-[240px] h-[50px] bg-[#007bff] hover:bg-[#00e1ff] text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out"
+>
+  Download APK for Android
+</a>
+
 </div>
       </div>  
     </section>
