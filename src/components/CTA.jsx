@@ -59,7 +59,7 @@ const CTA = () => {
                 className="bg-white rounded-lg shadow-lg p-6 text-center transition duration-300 transform hover:scale-105"
               >
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  ${(price.unit_amount * 0.01).toFixed(2)} {price.currency}
+                  S${(price.unit_amount * 0.01).toFixed(2)} {}
                 </h2>
                 <p className="text-gray-600 mb-4">Billed Every {price.interval}</p>
 

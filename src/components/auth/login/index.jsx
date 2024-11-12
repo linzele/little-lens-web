@@ -11,20 +11,49 @@ const Login = () => {
     const [isSigningIn, setIsSigningIn] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
+    // Helper function to get user-friendly error message
+    const getErrorMessage = (error) => {
+        switch (error.code) {
+            case 'auth/invalid-email':
+                return 'Invalid email address format.';
+            case 'auth/user-disabled':
+                return 'This account has been disabled.';
+            case 'auth/user-not-found':
+                return 'No account found with this email.';
+            case 'auth/wrong-password':
+                return 'Incorrect password.';
+            case 'auth/too-many-requests':
+                return 'Too many failed attempts. Please try again later.';
+            case 'auth/network-request-failed':
+                return 'Network error. Please check your connection.';
+            default:
+                return 'Incorrect Details. Please try again.';
+        }
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault()
+        setErrorMessage('') // Clear any existing errors
+        
         if(!isSigningIn) {
             setIsSigningIn(true)
-            await doSignInWithEmailAndPassword(email, password)
-            // doSendEmailVerification()
+            try {
+                await doSignInWithEmailAndPassword(email, password)
+            } catch (error) {
+                setErrorMessage(getErrorMessage(error))
+                setIsSigningIn(false)
+            }
         }
     }
 
     const onGoogleSignIn = (e) => {
         e.preventDefault()
+        setErrorMessage('') // Clear any existing errors
+        
         if (!isSigningIn) {
             setIsSigningIn(true)
-            doSignInWithGoogle().catch(err => {
+            doSignInWithGoogle().catch(error => {
+                setErrorMessage(getErrorMessage(error))
                 setIsSigningIn(false)
             })
         }
@@ -53,11 +82,14 @@ const Login = () => {
                                 type="email"
                                 autoComplete='email'
                                 required
-                                value={email} onChange={(e) => { setEmail(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                value={email}
+                                onChange={(e) => { 
+                                    setEmail(e.target.value)
+                                    setErrorMessage('') // Clear error when user types
+                                }}
+                                className={`w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300 ${errorMessage ? 'border-red-500' : ''}`}
                             />
                         </div>
-
 
                         <div>
                             <label className="text-sm text-gray-600 font-bold">
@@ -67,13 +99,19 @@ const Login = () => {
                                 type="password"
                                 autoComplete='current-password'
                                 required
-                                value={password} onChange={(e) => { setPassword(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                value={password}
+                                onChange={(e) => { 
+                                    setPassword(e.target.value)
+                                    setErrorMessage('') // Clear error when user types
+                                }}
+                                className={`w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300 ${errorMessage ? 'border-red-500' : ''}`}
                             />
                         </div>
 
                         {errorMessage && (
-                            <span className='text-red-600 font-bold'>{errorMessage}</span>
+                            <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg p-3 text-sm">
+                                {errorMessage}
+                            </div>
                         )}
 
                         <button
@@ -84,7 +122,6 @@ const Login = () => {
                             {isSigningIn ? 'Signing In...' : 'Sign In'}
                         </button>
                     </form>
-
                 </div>
             </main>
         </div>
