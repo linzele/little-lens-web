@@ -2,7 +2,7 @@ import story from "./story.png";
 import card from "./card.png";
 import logo from "./logo.png";
 import quotes from "./quotes.svg";
-import robot from "./main.png";
+import videoSource from "./videoSource.MP4";
 import landmark from "./Landmark.svg";
 import text from "./Text.svg";
 import star from "./Star.svg";
@@ -22,7 +22,7 @@ export {
   card,
   logo,
   quotes,
-  robot,
+  videoSource,
   landmark,
   text,
   star,
