@@ -1,12 +1,21 @@
-# Little Lens Web 📷
+# Little Lens Web 📷 - The Next Image Detection App
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://little-lens-web.vercel.app/)
 [![Built with Firebase](https://img.shields.io/badge/Built%20with-Firebase-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
 
 ## Overview
-Photography platform built with Next.js and Firebase, featuring cloud functions for serverless operations.
+Little Lens is an interactive and educational application designed primarily for children, offering fun and learning through image detection and storytelling. 
 
-## Tech Stack
+
+## ✨ Features
+- Image Detection
+- Story Generation
+- Text-To-Speech (TTS)
+- Interactive Learning
+- Personalization with Interests
+- User Friendly Interface
+  
+## 🛠️ Tech Stack
 - Frontend: Next.js, React
 - Backend: Firebase Cloud Functions
 - Database: Firestore
@@ -14,7 +23,7 @@ Photography platform built with Next.js and Firebase, featuring cloud functions 
 - Storage: Firebase Storage
 - Deployment: Vercel
 
-## Setup
+## 🚀 Setup
 1. Clone repository:
 ```bash
 git clone https://github.com/linzele/little-lens-web.git
@@ -55,31 +64,10 @@ npm install
 firebase deploy --only functions
 ```
 
-## Features
-- User authentication
-- Image upload/management
-- Real-time data sync
-- Cloud function processing
-- Responsive design
 
-## Structure
-```
-little-lens-web/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   └── utils/
-├── functions/
-├── public/
-└── firebase.json
-```
-
-## Live Demo
+## 🌐 Live Demo
 [Little Lens Web](https://little-lens-web.vercel.app/)
 
-## License
-MIT
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Author
-[@linzele](https://github.com/linzele)
